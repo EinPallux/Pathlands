@@ -1,6 +1,6 @@
 import { defineComponent, type Entity } from './ecs/store.ts';
 import type { DamageType, Faction, MonsterFamily, MonsterRank, Rarity } from './defs.ts';
-import type { Modifier, ResourceKind, StatBlock } from './combat/stats.ts';
+import type { ClassBaseStats, Modifier, ResourceKind, StatBlock } from './combat/stats.ts';
 import type { AilmentType } from './defs.ts';
 import type { AttackPayload } from './combat/types.ts';
 
@@ -54,7 +54,10 @@ export const Resource = defineComponent<Resource>('Resource');
 
 export interface Stats {
   block: StatBlock;
-  /** Modifiers from gear/passives/buffs; buffs re-push each recompute. */
+  /** The class/monster base curve, so stats can be recomputed on change. */
+  base: ClassBaseStats;
+  level: number;
+  /** Persistent modifiers from gear/passives (buffs are added at recompute). */
   baseMods: Modifier[];
   dirty: boolean;
 }
@@ -127,6 +130,8 @@ export interface CastState {
   aimX: number;
   aimY: number;
   fired: boolean;
+  payload: AttackPayload; // stats snapshot at cast time
+  level: number;
 }
 export interface SkillUser {
   slots: SkillSlotState[];
@@ -174,6 +179,8 @@ export interface Boss {
   phaseThresholds: number[]; // life fractions that trigger the next phase
   nextMechanicTick: number;
   enraged: boolean;
+  damageMult: number;
+  moveMult: number;
 }
 export const Boss = defineComponent<Boss>('Boss');
 

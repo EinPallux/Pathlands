@@ -37,7 +37,7 @@ function spawnTarget(world: World, mods: Modifier[], armor = 0): Entity {
     lastDamageType: 'physical',
     lastAttacker: 0,
   });
-  world.add(e, Stats, { block, baseMods: allMods, dirty: false });
+  world.add(e, Stats, { block, base: dummyBase, level: 1, baseMods: allMods, dirty: false });
   world.add(e, Control, emptyControl());
   return e;
 }
