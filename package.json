@@ -1,6 +1,6 @@
 {
   "name": "pathlands",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "private": true,
   "description": "A browser-playable 3D ARPG inspired by Diablo IV, Lost Ark, and Path of Exile 2.",
   "type": "module",

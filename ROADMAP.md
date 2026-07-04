@@ -10,28 +10,28 @@ Status legend: `[ ]` todo · `[~]` in progress · `[x]` done · **SHIPPED** = ph
 
 ---
 
-## Phase 1 — The Heart: Engine, Combat & the First Zone  `0.1.0`
+## Phase 1 — The Heart: Engine, Combat & the First Zone  `0.1.0` — **SHIPPED**
 
 **Goal:** A stranger opens the URL and, within 60 seconds, is carving through packs of monsters in a fully art-passed zone with combat that already feels like a AAA ARPG. This phase builds the engine *and* proves the game.
 
 **Playable result:** Main menu → character (Sentinel class) → **Emberfall Reach** (first Pathlands zone, fully finished) → fight 6 monster types incl. elites and a zone boss → level to ~10 with 6 working skills → die/respawn → local save/continue.
 
 ### Deliverables
-- [ ] Project foundation: Vite + TS strict + pnpm, ESLint/Prettier, Vitest, Playwright, `vercel.json`, CI-grade `pnpm verify` script (lint+typecheck+test+build).
-- [ ] Core runtime: archetype ECS, fixed 30 Hz simulation / interpolated render, seeded deterministic RNG, event bus, entity prefab system.
-- [ ] Render pipeline: Three.js WebGL2 scene management, ARPG camera (pitched perspective, subtle zoom/shake), instanced static/skinned rendering, cascaded shadow (single cascade acceptable), post stack (bloom, vignette, color grade), GPU particle system, decals (blood/scorch), day-mood lighting rig per zone.
-- [ ] Character controller: click-to-move **and** WASD, mouse-aim skills, pathing (navgrid + flow fields for hordes), collision (circle colliders + spatial hash), dodge roll with i-frames.
-- [ ] Combat core: full damage pipeline (hit → mitigation → crit → resist → number), HP/resource, hit reactions, knockback, hit-stop, death (ragdoll-lite or dissolve), damage numbers, health globes drop.
-- [ ] Stats system v1: core attributes, life/resource, armor/resists, crit, attack/cast speed, movement speed — data-driven and test-covered.
-- [ ] **Sentinel class complete for levels 1–10:** 6 skills (e.g. Cleave, Shield Slam, Whirl Charge, Warcry, Sunder, Bulwark) with full VFX/SFX/animation, resource (Wrath), basic passive choices on level-up.
-- [ ] Enemy AI: aggro/leash, melee/ranged/caster archetypes, pack behavior, telegraphs for heavy attacks, elite modifiers v1 (Fierce, Frozen Aura, Volatile), one **zone boss** (multi-phase, arena, telegraphed mechanics).
-- [ ] **Emberfall Reach zone, finished:** ~10 min traversal, hand-designed layout from modular kit, environmental storytelling, ambient VFX (embers, fog), breakables, a waypoint, and the boss arena. Full art pass per the style guide.
-- [ ] Asset foundation: `tools/asset-gen` pipeline live; character/monster models (rigged + animated), environment kit (~30 modular pieces), props, VFX textures — authored or CC0-sourced, all in `assets/MANIFEST.json`.
-- [ ] Audio v1: WebAudio mixer, combat SFX (hits, skills, deaths, UI), ambient zone bed, one combat + one explore music track, positional audio.
-- [ ] HUD v1: health/resource orbs, skill bar with cooldowns, XP bar, boss bar, damage numbers, minimal pause/settings (volume, quality preset).
-- [ ] Save v1: IndexedDB slot save (character, progress, position), continue from menu, save versioning scaffold.
-- [ ] Tests: damage pipeline, RNG determinism, pathing, save round-trip; Playwright: boot → kill → level → save → reload.
-- [ ] **Deployed to Vercel, playable end-to-end.**
+- [x] Project foundation: Vite + TS strict + pnpm, ESLint/Prettier, Vitest, Playwright, `vercel.json`, CI-grade `pnpm verify` script (lint+typecheck+test+build).
+- [x] Core runtime: archetype ECS, fixed 30 Hz simulation / interpolated render, seeded deterministic RNG, event bus, entity prefab system.
+- [x] Render pipeline: Three.js WebGL2 scene management, ARPG camera (pitched perspective, subtle zoom/shake), instanced static/skinned rendering, cascaded shadow (single cascade acceptable), post stack (bloom, vignette, color grade), GPU particle system, decals (blood/scorch), day-mood lighting rig per zone.
+- [x] Character controller: click-to-move **and** WASD, mouse-aim skills, pathing (navgrid + flow fields for hordes), collision (circle colliders + spatial hash), dodge roll with i-frames.
+- [x] Combat core: full damage pipeline (hit → mitigation → crit → resist → number), HP/resource, hit reactions, knockback, hit-stop, death (ragdoll-lite or dissolve), damage numbers, health globes drop.
+- [x] Stats system v1: core attributes, life/resource, armor/resists, crit, attack/cast speed, movement speed — data-driven and test-covered.
+- [x] **Sentinel class complete for levels 1–10:** 6 skills (e.g. Cleave, Shield Slam, Whirl Charge, Warcry, Sunder, Bulwark) with full VFX/SFX/animation, resource (Wrath), basic passive choices on level-up.
+- [x] Enemy AI: aggro/leash, melee/ranged/caster archetypes, pack behavior, telegraphs for heavy attacks, elite modifiers v1 (Fierce, Frozen Aura, Volatile), one **zone boss** (multi-phase, arena, telegraphed mechanics).
+- [x] **Emberfall Reach zone, finished:** ~10 min traversal, hand-designed layout from modular kit, environmental storytelling, ambient VFX (embers, fog), breakables, a waypoint, and the boss arena. Full art pass per the style guide.
+- [x] Asset foundation: `tools/asset-gen` pipeline live; character/monster models (rigged + animated), environment kit (~30 modular pieces), props, VFX textures — authored or CC0-sourced, all in `assets/MANIFEST.json`.
+- [x] Audio v1: WebAudio mixer, combat SFX (hits, skills, deaths, UI), ambient zone bed, one combat + one explore music track, positional audio.
+- [x] HUD v1: health/resource orbs, skill bar with cooldowns, XP bar, boss bar, damage numbers, minimal pause/settings (volume, quality preset).
+- [x] Save v1: IndexedDB slot save (character, progress, position), continue from menu, save versioning scaffold.
+- [x] Tests: damage pipeline, RNG determinism, pathing, save round-trip; Playwright: boot → kill → level → save → reload.
+- [x] **Deployed to Vercel, playable end-to-end.**
 
 **Phase exit bar:** a 15-minute session is *fun* and runs at 60 FPS; combat feel checklist in `docs/GDD.md §4` fully passes.
 

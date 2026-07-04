@@ -36,7 +36,7 @@ function respawnPlayer(sim: Sim): void {
   if (tf) {
     tf.x = start.x;
     tf.y = start.y;
-    tf.facing = -Math.PI / 2;
+    tf.facing = Math.PI / 2;
   }
   if (h) {
     h.current = h.max;

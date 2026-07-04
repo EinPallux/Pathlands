@@ -1,0 +1,341 @@
+/* In-game HUD. Minimal, diegetic-dark, updates directly from the simulation. */
+
+.hud {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  font-family: var(--pl-font);
+  color: var(--pl-ink);
+  z-index: 20;
+}
+
+/* Low-health danger vignette */
+.hud-vignette {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  box-shadow: inset 0 0 22vmin 6vmin rgba(150, 10, 20, 0.7);
+  opacity: 0;
+  transition: opacity 0.25s ease;
+}
+
+/* ---- Bottom cluster ---- */
+.hud-bottom {
+  position: absolute;
+  bottom: 18px;
+  left: 0;
+  right: 0;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  gap: 22px;
+}
+
+.orb {
+  position: relative;
+  width: 92px;
+  height: 92px;
+  border-radius: 50%;
+  overflow: hidden;
+  border: 2px solid #05060a;
+  box-shadow:
+    0 0 0 3px #1d1a16,
+    0 6px 16px rgba(0, 0, 0, 0.6),
+    inset 0 0 18px rgba(0, 0, 0, 0.7);
+  background: #120b0b;
+}
+.orb-fill {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 100%;
+  transition: height 0.12s linear;
+}
+.orb-health .orb-fill {
+  background: linear-gradient(180deg, #ff4a5a, #9c1020);
+}
+.orb-resource .orb-fill {
+  background: linear-gradient(180deg, #ffb066, #d1631a);
+}
+.orb-text {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 13px;
+  font-weight: 700;
+  text-shadow: 0 1px 3px #000;
+}
+.orb-gloss {
+  position: absolute;
+  top: 8%;
+  left: 18%;
+  width: 40%;
+  height: 26%;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.35), transparent 70%);
+}
+
+/* ---- Skill bar ---- */
+.skillbar {
+  display: flex;
+  gap: 8px;
+  padding: 6px 8px;
+  background: rgba(8, 7, 10, 0.55);
+  border: 1px solid var(--pl-panel-edge);
+  border-radius: 10px;
+}
+.skill-slot {
+  position: relative;
+  width: 56px;
+  height: 56px;
+  border-radius: 8px;
+  background: linear-gradient(160deg, #23201b, #14110d);
+  border: 1px solid #3a342a;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+.skill-slot.empty {
+  opacity: 0.3;
+}
+.skill-slot.nores {
+  filter: grayscale(0.7) brightness(0.6);
+}
+.skill-glyph {
+  font-size: 18px;
+  font-weight: 800;
+  letter-spacing: 0.02em;
+  color: var(--pl-ember-bright);
+  text-shadow: 0 1px 2px #000;
+}
+.skill-key {
+  position: absolute;
+  top: 2px;
+  left: 4px;
+  font-size: 10px;
+  color: var(--pl-ink-dim);
+  font-weight: 700;
+}
+.skill-cd {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  background: rgba(6, 6, 10, 0.72);
+  height: 0%;
+}
+.skill-cd-text {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 15px;
+  font-weight: 700;
+  color: #fff;
+  text-shadow: 0 1px 3px #000;
+}
+.potion-slot {
+  position: relative;
+  width: 56px;
+  height: 56px;
+  border-radius: 8px;
+  background: linear-gradient(160deg, #3a1420, #1a0a10);
+  border: 1px solid #5a2030;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.potion-count {
+  font-size: 20px;
+  font-weight: 800;
+  color: #ff6a7a;
+}
+.potion-slot .skill-key {
+  color: #d88;
+}
+
+/* ---- XP bar ---- */
+.xp-bar {
+  position: absolute;
+  bottom: 4px;
+  left: 12%;
+  right: 12%;
+  height: 4px;
+  background: #17130f;
+  border-radius: 2px;
+  overflow: hidden;
+}
+.xp-fill {
+  height: 100%;
+  width: 0%;
+  background: linear-gradient(90deg, #6f9bff, #b8d0ff);
+  transition: width 0.2s ease;
+}
+
+/* ---- Info ---- */
+.hud-info {
+  position: absolute;
+  top: 12px;
+  left: 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  font-size: 13px;
+  text-shadow: 0 1px 3px #000;
+}
+.hud-info .lvl {
+  color: var(--pl-gold);
+  font-weight: 700;
+}
+.hud-info .gold {
+  color: #e8c85a;
+}
+.hud-info .hint {
+  color: var(--pl-ink-dim);
+  font-size: 11px;
+  max-width: 240px;
+}
+
+/* ---- Boss bar ---- */
+.boss-bar {
+  position: absolute;
+  top: 16px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: min(560px, 70vw);
+  text-align: center;
+  transition: opacity 0.4s ease;
+}
+.boss-bar.hidden {
+  opacity: 0;
+}
+.boss-name {
+  font-family: var(--pl-font-display);
+  letter-spacing: 0.14em;
+  font-size: 15px;
+  color: #ffb9a0;
+  text-shadow: 0 0 10px rgba(255, 60, 40, 0.5);
+  margin-bottom: 4px;
+}
+.boss-hp {
+  height: 12px;
+  background: #1a0d0c;
+  border: 1px solid #3a1a16;
+  border-radius: 6px;
+  overflow: hidden;
+}
+.boss-hp-fill {
+  height: 100%;
+  width: 100%;
+  background: linear-gradient(90deg, #b6233a, #ff5a4a);
+  transition: width 0.15s linear;
+}
+.boss-pips {
+  display: flex;
+  gap: 4px;
+  justify-content: center;
+  margin-top: 4px;
+}
+.boss-pip {
+  width: 18px;
+  height: 3px;
+  background: #4a2a26;
+  border-radius: 2px;
+}
+.boss-pip.on {
+  background: var(--pl-ember-bright);
+}
+
+/* ---- Toasts ---- */
+.toast-layer {
+  position: absolute;
+  top: 22%;
+  left: 0;
+  right: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+}
+.toast {
+  font-family: var(--pl-font-display);
+  letter-spacing: 0.12em;
+  font-size: 20px;
+  color: var(--pl-ember-bright);
+  text-shadow: 0 2px 10px #000;
+  animation: toastIn 0.4s ease, toastOut 0.5s ease 2.2s forwards;
+}
+@keyframes toastIn {
+  from {
+    opacity: 0;
+    transform: translateY(-8px);
+  }
+}
+@keyframes toastOut {
+  to {
+    opacity: 0;
+  }
+}
+
+/* ---- Damage numbers (positioned by the VFX manager) ---- */
+.dmg-num {
+  position: absolute;
+  left: 0;
+  top: 0;
+  font-weight: 800;
+  font-size: 16px;
+  color: #fff;
+  text-shadow: 0 2px 4px #000;
+  pointer-events: none;
+  will-change: transform, opacity;
+}
+.dmg-crit {
+  font-size: 26px;
+  color: #ffd24a !important;
+}
+.dmg-heal {
+  color: #5ce87a !important;
+}
+.dmg-miss {
+  color: #9fb8ff !important;
+  font-size: 14px;
+}
+.dmg-info {
+  color: var(--pl-ember-bright) !important;
+  font-family: var(--pl-font-display);
+  letter-spacing: 0.1em;
+}
+
+/* ---- Death overlay ---- */
+.death-overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  background: rgba(20, 2, 4, 0.55);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.5s ease;
+}
+.death-overlay.show {
+  opacity: 1;
+}
+.death-title {
+  font-family: var(--pl-font-display);
+  font-size: 44px;
+  letter-spacing: 0.2em;
+  color: #d0303a;
+  text-shadow: 0 0 20px rgba(180, 20, 30, 0.6);
+}
+.death-sub {
+  color: var(--pl-ink-dim);
+  font-size: 14px;
+}

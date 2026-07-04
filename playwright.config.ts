@@ -14,7 +14,16 @@ export default defineConfig({
     trace: 'on-first-retry',
     screenshot: 'only-on-failure',
   },
-  projects: [{ name: 'chromium', use: { ...devices['Desktop Chrome'] } }],
+  projects: [
+    {
+      name: 'chromium',
+      use: {
+        ...devices['Desktop Chrome'],
+        // Use the environment's pre-installed Chromium instead of downloading.
+        launchOptions: { executablePath: process.env.PW_CHROMIUM_PATH || '/opt/pw-browsers/chromium' },
+      },
+    },
+  ],
   webServer: {
     command: 'pnpm build && pnpm preview',
     url: 'http://localhost:4173',

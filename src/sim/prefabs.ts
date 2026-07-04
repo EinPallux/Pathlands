@@ -48,7 +48,7 @@ export function spawnPlayer(world: World, tick: number, sheet: CharacterSheet): 
   const mods = equipmentMods(sheet);
   const block = computeStats(cls.baseStats, sheet.level, mods);
   const e = world.createEntity();
-  world.add(e, Transform, { x: 0, y: 0, facing: -Math.PI / 2 });
+  world.add(e, Transform, { x: 0, y: 0, facing: Math.PI / 2 });
   world.add(e, Velocity, { x: 0, y: 0 });
   world.add(e, Collider, { radius: 0.42, blocking: true, height: 1.9 });
   world.add(e, FactionC, { value: 'player' });

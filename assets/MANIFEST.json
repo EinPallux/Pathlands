@@ -1,0 +1,49 @@
+{
+  "$schema": "./manifest.schema.json",
+  "note": "Every asset in Pathlands is either authored procedurally (generated in code) or sourced CC0 (see docs/ASSET_PIPELINE.md). Phase 1 authors ALL assets procedurally at runtime from committed generators — no binary assets are shipped, so the initial payload is code-only and tiny. As baked GLB/KTX2/OGG assets are introduced in later phases they are recorded here with source + license.",
+  "generators": [
+    {
+      "id": "characters",
+      "path": "src/render/procgen/characters.ts",
+      "kind": "model",
+      "origin": "generated",
+      "produces": ["sentinel", "riven_wretch", "riven_husk", "riven_stalker", "ashborn_zealot", "ashborn_pyre", "riven_brute", "boss_gatewarden", "projectile"],
+      "budgetTris": 8000,
+      "license": "MIT (project code)"
+    },
+    {
+      "id": "environment",
+      "path": "src/render/procgen/environment.ts",
+      "kind": "model",
+      "origin": "generated",
+      "produces": ["brazier", "ruined_wall", "dead_tree", "rubble", "gate_arch", "banner", "ground"],
+      "budgetTris": 2000,
+      "license": "MIT (project code)"
+    },
+    {
+      "id": "materials",
+      "path": "src/render/procgen/materials.ts",
+      "kind": "material",
+      "origin": "generated",
+      "produces": ["rim-lit standard", "emissive", "metal", "unlit"],
+      "license": "MIT (project code)"
+    },
+    {
+      "id": "vfx-particles",
+      "path": "src/render/particles.ts",
+      "kind": "vfx",
+      "origin": "generated",
+      "produces": ["gpu-point-particles"],
+      "license": "MIT (project code)"
+    },
+    {
+      "id": "audio-sfx",
+      "path": "src/audio/audio.ts",
+      "kind": "audio",
+      "origin": "generated",
+      "produces": ["combat sfx (synthesized)", "ui sfx", "ambient music bed"],
+      "license": "MIT (project code)"
+    }
+  ],
+  "sourced": []
+}

@@ -25,9 +25,10 @@ export interface CharacterSheet {
   bossDefeated: string[];
 }
 
-/** XP required to advance from `level` to `level + 1`. */
+/** XP required to advance from `level` to `level + 1`. Tuned (0.1.0) so a
+ *  campaign clear of Emberfall lands the player around level 5–6 by the boss. */
 export function xpToNext(level: number): number {
-  return Math.round(50 * Math.pow(level, 1.55));
+  return Math.round(40 * Math.pow(level, 1.42));
 }
 
 export function xpTotalForLevel(level: number): number {

@@ -32,6 +32,8 @@ export default [
       // The interface + companion-const component pattern is valid TS (separate
       // type/value namespaces); tsc catches genuine value redeclarations.
       'no-redeclare': 'off',
+      // TypeScript resolves DOM/ambient types; no-undef can't see them.
+      'no-undef': 'off',
       'no-console': ['warn', { allow: ['warn', 'error', 'info'] }],
       eqeqeq: ['error', 'always'],
       'prefer-const': 'error',
@@ -70,6 +72,7 @@ export default [
       '@typescript-eslint/no-explicit-any': 'error',
       '@typescript-eslint/no-unused-vars': ['error', { argsIgnorePattern: '^_' }],
       'no-redeclare': 'off',
+      'no-undef': 'off',
       'no-console': 'off',
       'no-restricted-properties': 'off',
       'no-restricted-globals': 'off',
