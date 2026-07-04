@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <meta name="theme-color" content="#0a0a0d" />
+    <meta name="description" content="Pathlands — a browser-playable 3D action RPG." />
+    <title>Pathlands</title>
+    <link rel="preload" href="/src/main.ts" as="script" />
+  </head>
+  <body>
+    <div id="app">
+      <canvas id="game-canvas"></canvas>
+      <div id="ui-root"></div>
+      <div id="boot-screen">
+        <div class="boot-logo">PATHLANDS</div>
+        <div class="boot-sub">Walk the broken paths</div>
+        <div class="boot-bar"><div class="boot-bar-fill" id="boot-bar-fill"></div></div>
+        <div class="boot-status" id="boot-status">Kindling the last lantern…</div>
+      </div>
+    </div>
+    <noscript>
+      <div style="color: #ddd; font-family: sans-serif; padding: 2rem">
+        Pathlands requires JavaScript and a WebGL2-capable browser.
+      </div>
+    </noscript>
+    <script type="module" src="/src/main.ts"></script>
+  </body>
+</html>
